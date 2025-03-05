@@ -8,11 +8,10 @@ import (
 func main() {
 	fmt.Println("SQUARE NUMBERS")
 	list := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
-
+	
 	results := make(chan int, len(list))
 	var wg sync.WaitGroup
 
-	//for squares
 	for _, num := range list {
 		wg.Add(1)
 		go square(num, results, &wg)
