@@ -18,18 +18,15 @@ func main() {
 		go square(num, results, &wg)
 	}
 
-	// Close the channel after all squares are done
 	go func() {
 		wg.Wait()
 		close(results)
 	}()
 
-	// Start the aggregator
 	var wga sync.WaitGroup
 	wga.Add(1)
 	go aggregate(results, &wga)
 	wga.Wait()
-	// Run aggregate in the main goroutine
 }
 
 func square(num int, results chan int, wg *sync.WaitGroup) {
